@@ -34,6 +34,13 @@ set wildmenu
 " turn on ruler
 set ruler
 
+" wrap lines when they are too long
+set wrap
+
+" hide buffer (file) instead of abonding when switching
+" to another buffer
+set hidden
+
 " highlight current line
 set cursorline
 
@@ -362,3 +369,18 @@ function! SelectaIdentifier()
   call SelectaCommand("find * -type f", "-s " . @z, ":e")
 endfunction
 nnoremap <c-g> :call SelectaIdentifier()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Misc
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" tmux will only forward escape sequences to the terminal if surrounded by a
+" DCS sequence
+
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
