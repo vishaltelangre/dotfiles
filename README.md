@@ -62,7 +62,3 @@ You could also use `~/.extra` to override settings, functions and aliases from m
 
 Suggestions/improvements
 [welcome](https://github.com/vishaltelangre/dotfiles/issues)!
-
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/PfwgcRiC73ERAe1WTDUo4DmM/vishaltelangre/dotfiles'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/PfwgcRiC73ERAe1WTDUo4DmM/vishaltelangre/dotfiles.svg' />
-</a>
