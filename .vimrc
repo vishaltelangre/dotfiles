@@ -82,15 +82,15 @@ set ignorecase smartcase
 " trim trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
-" make ',' a <Leader>
-let mapleader=","
+" make ' ' (spacebar) a <Leader>
+let mapleader=" "
 
 " always show tab bar at the top
 set showtabline=2
 
 " theme settings
-set background=dark
-colorscheme solarized
+"set background=dark
+"colorscheme solarized
 
 " Vim sessions default to capturing all global options, which includes the 'runtimepath' that pathogen.vim manipulates. This can cause other problems too, recommonded way is to turn that behavior off:
 set sessionoptions-=options
@@ -165,12 +165,9 @@ let g:multi_cursor_next_key='<C-v>'
 " expand items with tab
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
-" go to next edit with ctrl+n
-let g:user_emmet_next_key='<C-n>'
-
 " NERDTREE
 " toggle NERDTree easily
-" map <c-n> :NERDTreeToggle<CR>
+nmap <C-n> :NERDTreeToggle<CR>
 
 " MISC
 " disable folding in markdown mode
@@ -272,60 +269,6 @@ endfunction
 map <leader>n :call RenameFile()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>gr :topleft :split config/routes.rb<cr>
-function! ShowRoutes()
-  " Requires 'scratch' plugin
-  :topleft 100 :split __Routes__
-  " Make sure Vim doesn't write __Routes__ as a file
-  :set buftype=nofile
-  " Delete everything
-  :normal 1GdG
-  " Put routes output in buffer
-  :0r! rake -s routes
-  " Size window to number of lines (1 plus rake output length)
-  :exec ":normal " . line("$") . "_ "
-  " Move cursor to bottom
-  :normal 1GG
-  " Delete empty trailing line
-  :normal dd
-endfunction
-map <leader>gR :call ShowRoutes()<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OpenChangedFiles COMMAND
-" Open a split for each dirty file in git
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! OpenChangedFiles()
-  only " Close all windows, unless they're modified
-  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
-  let filenames = split(status, "\n")
-  exec "edit " . filenames[0]
-  for filename in filenames[1:]
-    exec "sp " . filename
-  endfor
-endfunction
-command! OpenChangedFiles :call OpenChangedFiles()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RemoveFancyCharacters COMMAND
-" Remove smart quotes, etc.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RemoveFancyCharacters()
-    let typo = {}
-    let typo["“"] = '"'
-    let typo["”"] = '"'
-    let typo["‘"] = "'"
-    let typo["’"] = "'"
-    let typo["–"] = '--'
-    let typo["—"] = '---'
-    let typo["…"] = '...'
-    :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
-endfunction
-command! RemoveFancyCharacters :call RemoveFancyCharacters()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Selecta Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Run a given vim command on the results of fuzzy selecting from a given shell
@@ -351,14 +294,15 @@ function! SelectaFile(path, glob)
 endfunction
 
 nnoremap <leader>f :call SelectaFile(".", "*")<cr>
-nnoremap <leader>gv :call SelectaFile("app/views", "*")<cr>
-nnoremap <leader>gc :call SelectaFile("app/controllers", "*")<cr>
-nnoremap <leader>gm :call SelectaFile("app/models", "*")<cr>
-nnoremap <leader>gh :call SelectaFile("app/helpers", "*")<cr>
-nnoremap <leader>gl :call SelectaFile("lib", "*")<cr>
-nnoremap <leader>gp :call SelectaFile("public", "*")<cr>
-nnoremap <leader>ga :call SelectaFile("app/assets", "*")<cr>
-nnoremap <leader>gs :call SelectaFile("app/services", "*")<cr>
+nnoremap <leader>rv :call SelectaFile("app/views", "*")<cr>
+nnoremap <leader>rc :call SelectaFile("app/controllers", "*")<cr>
+nnoremap <leader>rm :call SelectaFile("app/models", "*")<cr>
+nnoremap <leader>rh :call SelectaFile("app/helpers", "*")<cr>
+nnoremap <leader>rl :call SelectaFile("lib", "*")<cr>
+nnoremap <leader>rp :call SelectaFile("public", "*")<cr>
+nnoremap <leader>ra :call SelectaFile("app/assets", "*")<cr>
+nnoremap <leader>rs :call SelectaFile("app/services", "*")<cr>
+nnoremap <leader>rj :call SelectaFile("app/javascript", "*")<cr>
 
 "Fuzzy select
 function! SelectaIdentifier()
