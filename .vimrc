@@ -41,8 +41,15 @@ set wrap
 " to another buffer
 set hidden
 
-" highlight current line
+" highlight current line (bluish bg, transparent fg)
 set cursorline
+:hi CursorLine cterm=NONE ctermbg=17 ctermfg=NONE
+
+" thin cursor
+if $TERM_PROGRAM =~ "iTerm"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif
 
 " allow use of mouse
 set mouse=a
@@ -75,6 +82,7 @@ set mat=2
 " highlight search results
 set hlsearch
 set incsearch
+nnoremap \ :noh<cr> " clear the search highlight with "\", "n" to restart search
 
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
@@ -82,11 +90,8 @@ set ignorecase smartcase
 " trim trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
-" make ' ' (spacebar) a <Leader>
-let mapleader=" "
-
-" always show tab bar at the top
-set showtabline=2
+" make ',' a <Leader>
+let mapleader=","
 
 " theme settings
 "set background=dark
@@ -215,8 +220,6 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>y "*y
-
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -229,8 +232,15 @@ imap <c-l> <space>=><space>
 " Can't be bothered to understand ESC vs <c-c> in insert mode
 imap <c-c> <esc>
 
-nnoremap <leader><leader> <c-^>
+" Switch between buffer
+map <leader>b :bn<cr>
+map <leader>B :bp<cr>
 
+" Copy-paste to-from system clipboard (+ variant)
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
