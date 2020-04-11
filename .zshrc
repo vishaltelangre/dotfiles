@@ -35,3 +35,5 @@ source ~/.iterm2_shell_integration.zsh
 
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

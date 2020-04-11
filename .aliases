@@ -175,5 +175,5 @@ alias help='tldr'
 
 # Tmux
 # Attach to an existing session or create a new session
-alias tm="tmux attach || tmux new"
-alias tmux="tm"
+alias tmux="tmux attach || tmux new"
+alias tm="tmux"
