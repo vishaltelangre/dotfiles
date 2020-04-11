@@ -7,36 +7,31 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="poor-programmer"
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
-export UPDATE_ZSH_DAYS=5
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
-
-# Project Directories
- PROJECT_PATHS=(~/projects/ruby ~/projects/js)
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(tmux autojump bundler capistrano coffee colorize command-not-found cp dircycle dirpersist encode64 extract fasd gem git git-extras gitfast github git-remote-branch heroku history history-substring-search last-working-dir lol nanoc node npm pj python rails rake rbenv rsync ruby rvm ssh-agent sublime themes urltools)
+plugins=(git z)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+eval "$(rbenv init -)"
+eval "$(hub alias -s)"
+
+export VISUAL=nano
+alias vim='/usr/local/bin/vim'
 PATH=$PATH:/usr/bin
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
+fpath=(~/.zsh/completions $fpath) 
+autoload -U compinit && compinit
+
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+
+source ~/.iterm2_shell_integration.zsh
+
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export GROOVY_HOME=/usr/local/opt/groovy/libexec

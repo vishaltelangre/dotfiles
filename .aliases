@@ -173,3 +173,7 @@ export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
 alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 alias help='tldr'
 
+# Tmux
+# Attach to an existing session or create a new session
+alias tm="tmux attach || tmux new"
+alias tmux="tm"
