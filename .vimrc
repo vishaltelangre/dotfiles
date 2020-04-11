@@ -1,7 +1,23 @@
 " vim:set ts=2 sts=2 sw=2 expandtab:
 
-" Execute Pathogen-installed plugins
-execute pathogen#infect()
+call plug#begin('~/.vim/plugged')
+
+Plug 'editorconfig/editorconfig-vim'
+Plug 'justinmk/vim-sneak'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'airblade/vim-rooter'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'machakann/vim-highlightedyank'
+Plug 'andymass/vim-matchup'
+Plug 'stephpy/vim-yaml'
+Plug 'rust-lang/rust.vim'
+Plug 'vim-ruby/vim-ruby'
+Plug 'plasticboy/vim-markdown'
+Plug 'morhetz/gruvbox'
+
+" Initialize plugin system
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL
@@ -201,7 +217,7 @@ command! -bang -nargs=* Rg
 
 function! s:list_cmd()
   let base = fnamemodify(expand('%'), ':h:.:S')
-  return base == '.' ? 'fd --type file --follow' : printf('fd --type file --follow | proximity-sort %s', shellescape(expand('%')))
+  return 'fd --type file --follow'
 endfunction
 
 command! -bang -nargs=? -complete=dir Files
@@ -216,10 +232,6 @@ nmap <leader>; :Buffers<CR>
 let g:rustfmt_autosave = 1 " format on save
 let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
-
-" VIM-MARKDOWN (https://github.com/gabrielelana/vim-markdown)
-" let g:markdown_enable_conceal = 1
-" au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md set ft=markdown
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')
