@@ -15,6 +15,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'plasticboy/vim-markdown'
 Plug 'morhetz/gruvbox'
+Plug 'itchyny/lightline.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -103,9 +104,6 @@ nnoremap \ :noh<cr> " clear the search highlight with "\", "n" to restart search
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
 
-" trim trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
-
 " make 'space' a <Leader>
 let mapleader = "\<Space>"
 
@@ -178,33 +176,25 @@ set foldlevel=1
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" MULTIPLE SELECTION
-" use ctrl+v to select next match (similar to Sublime's CMD+D)
-let g:multi_cursor_next_key='<C-v>'
-
-" EMMET
-" expand items with tab
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-
-" NERDTREE
+" [PLUGIN] NERDTREE
 " toggle NERDTree easily
-nmap <C-n> :NERDTreeToggle<CR>
+nmap <leader>n :NERDTreeToggle<CR>
 
-" EDITORCONFIG-VIM
+" [PLUGIN] EDITORCONFIG-VIM
 " disable trimming trailing whitespaces globally
 let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
 
-" SNEAK
+" [PLUGIN] SNEAK
 let g:sneak#label = 1
 let g:sneak#s_next = 1
 
-" HIGHLIGHTEDYANK
+" [PLUGIN] HIGHLIGHTEDYANK
 let g:highlightedyank_highlight_duration = 1000
 
-" MATCHUP
+" [PLUGIN] MATCHUP
 let g:loaded_matchit = 1
 
-" FZF
+" [PLUGIN] FZF
 " <leader>s for Rg search
 noremap <leader>s :Rg<CR>
 let g:fzf_layout = { 'down': '~20%' }
@@ -217,7 +207,7 @@ command! -bang -nargs=* Rg
 
 function! s:list_cmd()
   let base = fnamemodify(expand('%'), ':h:.:S')
-  return 'fd --type file --follow'
+  return 'fd --type file --follow --hidden'
 endfunction
 
 command! -bang -nargs=? -complete=dir Files
@@ -228,10 +218,24 @@ command! -bang -nargs=? -complete=dir Files
 map <C-p> :Files<CR>
 nmap <leader>; :Buffers<CR>
 
-" RUST
+" [PLUGIN] RUST
 let g:rustfmt_autosave = 1 " format on save
 let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
+
+" [PLUGIN] Lightline
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \ },
+\ }
+function! LightlineFilename()
+  return expand('%:t') !=# '' ? @% : '[No Name]'
+endfunction
+
+" [PLUGIN] Gruvbox color scheme
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_italic = 1
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')
@@ -257,7 +261,7 @@ augroup vimrcEx
 
   "for ruby, autoindent with two spaces, always expand tabs
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  autocmd FileType python,go set sw=4 sts=4 et
+  autocmd FileType python,go,rust set sw=4 sts=4 et
 
   autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
@@ -336,18 +340,11 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-" Left and right can switch buffers
-nnoremap <left> :bp<CR>
-nnoremap <right> :bn<CR>
-
 " <leader><leader> toggles between buffers
 nnoremap <leader><leader> <c-^>
 
 " <leader>q shows stats
 nnoremap <leader>q g<c-g>
-
-" Keymap for replacing up to next _ or -
-noremap <leader>m ct_
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
@@ -384,52 +381,6 @@ function! RenameFile()
     endif
 endfunction
 map <leader>n :call RenameFile()<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Selecta Mappings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Run a given vim command on the results of fuzzy selecting from a given shell
-" command. See usage below.
-function! SelectaCommand(choice_command, selecta_args, vim_command)
-  try
-    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-    " Escape spaces in the file name. That ensures that it's a single argument
-    " when concatenated with vim_command and run with exec.
-    let selection = substitute(selection, ' ', '\\ ', "g")
-  catch /Vim:Interrupt/
-    " Swallow the ^C so that the redraw below happens; otherwise there will be
-    " leftovers from selecta on the screen
-    redraw!
-    return
-  endtry
-  redraw!
-  exec a:vim_command . " " . selection
-endfunction
-
-function! SelectaFile(path, glob)
-  call SelectaCommand("find " . a:path . "/* -type f -and -iname '" . a:glob . "' -and -not -iname '*.pyc'", "", ":e")
-endfunction
-
-nnoremap <leader>f :call SelectaFile(".", "*")<cr>
-nnoremap <leader>rv :call SelectaFile("app/views", "*")<cr>
-nnoremap <leader>rc :call SelectaFile("app/controllers", "*")<cr>
-nnoremap <leader>rm :call SelectaFile("app/models", "*")<cr>
-nnoremap <leader>rh :call SelectaFile("app/helpers", "*")<cr>
-nnoremap <leader>rl :call SelectaFile("lib", "*")<cr>
-nnoremap <leader>rp :call SelectaFile("public", "*")<cr>
-nnoremap <leader>ra :call SelectaFile("app/assets", "*")<cr>
-nnoremap <leader>rs :call SelectaFile("app/services", "*")<cr>
-nnoremap <leader>rj :call SelectaFile("app/javascript", "*")<cr>
-
-"Fuzzy select
-function! SelectaIdentifier()
-  " Yank the word under the cursor into the z register
-  normal "zyiw
-  " Fuzzy match files in the current directory, starting with the word under
-  " the cursor
-  call SelectaCommand("find * -type f", "-s " . @z, ":e")
-endfunction
-nnoremap <c-g> :call SelectaIdentifier()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Completion
