@@ -178,7 +178,7 @@ set foldlevel=1
 
 " [PLUGIN] NERDTREE
 " toggle NERDTree easily
-nmap <leader>n :NERDTreeToggle<CR>
+nmap <C-n> :NERDTreeToggle<CR>
 
 " [PLUGIN] EDITORCONFIG-VIM
 " disable trimming trailing whitespaces globally
@@ -235,7 +235,7 @@ endfunction
 
 " [PLUGIN] Gruvbox color scheme
 let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_italic = 1
+let g:gruvbox_italic = 0
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')
@@ -387,7 +387,7 @@ map <leader>n :call RenameFile()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Better display for messages
-set cmdheight=2
+set cmdheight=1
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 " Use tab for trigger completion with characters ahead and navigate.
