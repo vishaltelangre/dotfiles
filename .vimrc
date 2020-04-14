@@ -16,6 +16,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'plasticboy/vim-markdown'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
+Plug 'airblade/vim-gitgutter'
 
 " Initialize plugin system
 call plug#end()
