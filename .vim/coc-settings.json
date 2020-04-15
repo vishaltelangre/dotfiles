@@ -1,0 +1,5 @@
+{
+    "json.format.enable": true,
+    "codeLens.enable": true,
+    "solargraph.useBundler": true
+}

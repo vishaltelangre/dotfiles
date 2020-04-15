@@ -18,7 +18,7 @@ source $ZSH/oh-my-zsh.sh
 eval "$(rbenv init -)"
 eval "$(hub alias -s)"
 
-export VISUAL=nano
+export VISUAL=vim
 alias vim='/usr/local/bin/vim'
 PATH=$PATH:/usr/bin
 
@@ -37,3 +37,5 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export SOLARGRAPH_GLOBAL_CONFIG="~/.solargraph.yml"

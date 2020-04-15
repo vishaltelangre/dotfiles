@@ -17,6 +17,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Initialize plugin system
 call plug#end()
@@ -238,6 +239,9 @@ endfunction
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_italic = 0
 
+" [PLUGIN] coc.nvim
+let g:coc_global_extensions = ['coc-rls', 'coc-json', 'coc-css', 'coc-html', 'coc-elixir', 'coc-emmet', 'coc-go', 'coc-solargraph', 'coc-tsserver', 'coc-yaml']
+
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
@@ -347,6 +351,24 @@ nnoremap <leader><leader> <c-^>
 " <leader>q shows stats
 nnoremap <leader>q g<c-g>
 
+" 'Smart' nevigation
+nmap <silent> E <Plug>(coc-diagnostic-prev)
+nmap <silent> W <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>l <Plug>(coc-diagnostic-info)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
@@ -388,7 +410,7 @@ map <leader>n :call RenameFile()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Better display for messages
-set cmdheight=1
+set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 " Use tab for trigger completion with characters ahead and navigate.
@@ -403,7 +425,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Use <c-.> to trigger completion.
-inoremap <silent><expr> <c-.> coc#refresh()
+inoremap <silent><expr> <C-.> coc#refresh()
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
