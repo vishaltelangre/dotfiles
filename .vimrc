@@ -65,6 +65,10 @@ set hidden
 set cursorline
 :hi CursorLine cterm=NONE ctermbg=17 ctermfg=NONE
 
+" set color column
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
 " thin cursor
 if $TERM_PROGRAM =~ "iTerm"
   let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
