@@ -19,6 +19,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs'
+Plug 'elixir-editors/vim-elixir'
 
 " Initialize plugin system
 call plug#end()
@@ -214,7 +215,7 @@ command! -bang -nargs=* Rg
 
 function! s:list_cmd()
   let base = fnamemodify(expand('%'), ':h:.:S')
-  return 'fd --type file --follow --hidden'
+  return 'ff --exclude-dir-paths --ignore-gitignore --exclude .git .'
 endfunction
 
 command! -bang -nargs=? -complete=dir Files
