@@ -16,6 +16,12 @@
     attributesfile = ~/.gitattributes
     # Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
     # whitespace = space-before-tab,indent-with-non-tab,trailing-space
+    #
+    # Use https://github.com/dandavison/delta to show diff
+    pager = delta --plus-color="#012800" --minus-color="#340001"
+
+[interactive]
+    diffFilter = delta --color-only
 
 [color]
     # Use colors in Git commands that are capable of colored output when outputting to the terminal
@@ -83,9 +89,6 @@
     program = gpg
 [fetch]
     prune = false
-[pager]
-       diff = diff-so-fancy | less --tabs=1,5 -RFX
-       show = diff-so-fancy | less --tabs=1,5 -RFX
 [gitflow "prefix"]
     feature = feature
     hotfix = hotfix
