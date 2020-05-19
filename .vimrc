@@ -20,6 +20,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs'
 Plug 'elixir-editors/vim-elixir'
+Plug 'preservim/nerdcommenter'
 
 " Initialize plugin system
 call plug#end()
@@ -247,6 +248,20 @@ let g:gruvbox_italic = 0
 
 " [PLUGIN] coc.nvim
 let g:coc_global_extensions = ['coc-rls', 'coc-json', 'coc-css', 'coc-html', 'coc-elixir', 'coc-emmet', 'coc-go', 'coc-solargraph', 'coc-tsserver', 'coc-yaml']
+
+" [PLUGIN] nerdcommenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')

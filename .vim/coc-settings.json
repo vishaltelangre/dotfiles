@@ -1,5 +1,12 @@
 {
     "json.format.enable": true,
     "codeLens.enable": true,
-    "solargraph.useBundler": true
+    "solargraph.useBundler": true,
+    "solargraph.promptDownload": true,
+    "solargraph.completion": true,
+    "solargraph.hover": true,
+    "solargraph.autoformat": true,
+    "solargraph.symbols": true,
+    "solargraph.definitions": true,
+    "solargraph.references": true
 }
