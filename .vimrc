@@ -89,6 +89,12 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " add line numbers
 set number
 
+" relative line numbers
+set relativenumber 
+
+" Also show current absolute line
+set number
+
 " display incomplete commands
 set showcmd
 
