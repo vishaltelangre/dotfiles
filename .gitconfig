@@ -18,7 +18,7 @@
     # whitespace = space-before-tab,indent-with-non-tab,trailing-space
     #
     # Use https://github.com/dandavison/delta to show diff
-    pager = delta --plus-color="#012800" --minus-color="#340001"
+    pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
 
 [interactive]
     diffFilter = delta --color-only
