@@ -13,12 +13,12 @@ font:
 # Colors (Gruvbox dark)
 colors:
   primary:
-    background: "#000000"
+    background: "#1e1e1e"
     foreground: "#ebdbb2"
   normal:
-    black: "#4a4a4a"
-    red: "#F66732"
-    green: "#98971a"
+    black: "#5e5e5e"
+    red: "#ff6344"
+    green: "#aaff73"
     yellow: "#d79921"
     blue: "#458588"
     magenta: "#b16286"
