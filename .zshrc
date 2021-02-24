@@ -31,7 +31,7 @@ autoload -U compinit && compinit
 
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
-source ~/.iterm2_shell_integration.zsh
+#source ~/.iterm2_shell_integration.zsh
 
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
