@@ -1,5 +1,17 @@
 " vim:set ts=2 sts=2 sw=2 expandtab:
 
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'editorconfig/editorconfig-vim'
@@ -90,7 +102,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set number
 
 " relative line numbers
-set relativenumber 
+set relativenumber
 
 " Also show current absolute line
 set number
@@ -253,7 +265,7 @@ let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_italic = 0
 
 " [PLUGIN] coc.nvim
-let g:coc_global_extensions = ['coc-rls', 'coc-json', 'coc-css', 'coc-html', 'coc-elixir', 'coc-emmet', 'coc-go', 'coc-solargraph', 'coc-tsserver', 'coc-yaml']
+let g:coc_global_extensions = ['coc-rls', 'coc-json', 'coc-css', 'coc-html', 'coc-elixir', 'coc-emmet', 'coc-go', 'coc-solargraph', 'coc-tsserver', 'coc-yaml', 'coc-prettier']
 
 " [PLUGIN] nerdcommenter
 " Add spaces after comment delimiters by default
@@ -266,7 +278,7 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
+" Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
@@ -395,6 +407,11 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" Format using Prettier
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
