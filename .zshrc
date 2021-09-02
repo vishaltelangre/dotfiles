@@ -22,20 +22,19 @@ export VISUAL=vim
 alias vim='/usr/local/bin/vim'
 PATH=$PATH:/usr/bin
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+# nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 fpath=(~/.zsh/completions $fpath) 
 autoload -U compinit && compinit
 
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
-#source ~/.iterm2_shell_integration.zsh
+# source ~/.iterm2_shell_integration.zsh
 
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export SOLARGRAPH_GLOBAL_CONFIG="~/.solargraph.yml"
