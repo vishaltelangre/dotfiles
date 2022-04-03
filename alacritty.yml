@@ -3,12 +3,12 @@ TERM: xterm-256color
 font:
   size: 18
   normal:
-    family: Fira Code
+    family: FiraCode Nerd Font
     style: Regular
   bold:
-    family: Fira Code
+    family: FiraCode Nerd Font
   italic:
-    family: Fira Code
+    family: FiraCode Nerd Font
 
 # Colors (Gruvbox dark)
 colors:
