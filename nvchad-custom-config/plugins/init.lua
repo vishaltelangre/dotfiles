@@ -8,7 +8,7 @@ return {{"williamboman/nvim-lsp-installer"}, {
     "github/copilot.vim",
     config = function()
         vim.g.copilot_no_tab_map = true
-        vim.api.nvim_set_keymap("i", "<space>a", 'copilot#Accept("<CR>")', {
+        vim.api.nvim_set_keymap("i", "<C-M-a>", 'copilot#Accept("<CR>")', {
             silent = true,
             expr = true
         })

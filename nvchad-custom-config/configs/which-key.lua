@@ -111,8 +111,9 @@ M.setup = function()
         -- Misc
         ["<C-c>"] = {'<Esc>', 'close buffer'},
         ["<C-s>"] = "save file",
-        ["<C-f>m"] = {"<Cmd>lua vim.lsp.buf.formatting()<CR>", "format"}
-
+        ["<C-f>m"] = {"<Cmd>lua vim.lsp.buf.formatting()<CR>", "format"},
+        ['[d'] = {'<PageUp>', "Page up"},
+        [']d'] = {'<PageDown>', "Page down"}
     })
 
     wk.register({
