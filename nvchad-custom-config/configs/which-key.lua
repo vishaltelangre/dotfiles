@@ -18,6 +18,14 @@ M.setup = function()
                 t = {':Telescope themes <CR>', 'Telescope themes'}
             },
 
+            -- Session management
+            s = {
+                name = "+session",
+                l = {":SessionManager load_session<CR>", "Select and load session"},
+                s = {":SessionManager save_current_session<CR>", "Save current session"},
+                d = {":SessionManager delete_session<CR>", "Select and delete session"}
+            },
+
             -- Line numbers
             n = {
                 name = "+line numbers",

@@ -25,4 +25,10 @@ return {{"williamboman/nvim-lsp-installer"}, {
     config = function()
         require('custom.configs.which-key').setup()
     end
+}, {"stevearc/dressing.nvim"}, {
+    "Shatur/neovim-session-manager",
+    after = {"plenary.nvim", "dressing.nvim"},
+    config = function()
+        require('custom.configs.session-manager').setup()
+    end
 }}
