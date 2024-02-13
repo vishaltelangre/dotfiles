@@ -26,5 +26,6 @@ unset file
 # Set Aliases
 source ~/.aliases
 source ~/.functions
+source ~/.env
 
 # $SHELL=/bin/zsh

@@ -38,3 +38,9 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/usr/local/sbin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/vishal/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
