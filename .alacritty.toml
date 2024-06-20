@@ -24,8 +24,9 @@ yellow = "#d79921"
 background = "#1e1e1e"
 foreground = "#ebdbb2"
 
-[cursor]
-style = "Beam"
+[cursor.style]
+shape = "Block"
+blinking = "Always"
 
 [font]
 size = 14
@@ -41,7 +42,7 @@ family = "FiraCode Nerd Font"
 style = "Regular"
 
 [window]
-decorations = "buttonless"
+decorations = "Buttonless"
 dynamic_padding = true
 
 [window.padding]

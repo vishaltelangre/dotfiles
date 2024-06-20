@@ -177,3 +177,14 @@ alias help='tldr'
 # Attach to an existing session or create a new session
 alias tmux="tmux attach || tmux new"
 alias tm="tmux"
+
+# GitHub Copilot
+alias ghcx='gh copilot explain'
+alias ghcs='gh copilot suggest'
+
+# Git commit helpers
+# Today's commits
+alias todays_commits='git log --pretty=format:"- %s" --first-parent --since="$(date +'%Y-%m-%d') 00:00:00" --reverse | (echo "Today'\''s commits ($(date +'%Y-%m-%d'))\n"; cat; echo)'
+
+# Yesterday's commits
+alias yesterdays_commits='git log --pretty=format:"- %s" --first-parent --after="$(date -v-1d +'%Y-%m-%d') 00:00:00" --before="$(date -v-1d +'%Y-%m-%d') 23:59:59" --reverse | (echo "Yesterday'\''s commits ($(date -v-1d +'%Y-%m-%d'))\n"; cat; echo)'
