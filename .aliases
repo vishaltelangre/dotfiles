@@ -158,6 +158,7 @@ alias c='rails c' # Rails 3
 alias tailf='tail -f'
 alias tfdl='tail -f log/development.log'
 alias tftl='tail -f log/test.log'
+alias be='bundle exec'
 
 alias ka9='killall -9'
 alias k9='kill -9'
@@ -184,7 +185,7 @@ alias ghcs='gh copilot suggest'
 
 # Git commit helpers
 # Today's commits
-alias todays_commits='git log --pretty=format:"- %s" --first-parent --since="$(date +'%Y-%m-%d') 00:00:00" --reverse | (echo "Today'\''s commits ($(date +'%Y-%m-%d'))\n"; cat; echo)'
+alias todays_commits='git log main..HEAD --pretty=format:"- %s" --first-parent --since="$(date +'%Y-%m-%d') 00:00:00" --reverse | (echo "Today'\''s commits ($(date +'%Y-%m-%d'))\n"; cat; echo)'
 
 # Yesterday's commits
-alias yesterdays_commits='git log --pretty=format:"- %s" --first-parent --after="$(date -v-1d +'%Y-%m-%d') 00:00:00" --before="$(date -v-1d +'%Y-%m-%d') 23:59:59" --reverse | (echo "Yesterday'\''s commits ($(date -v-1d +'%Y-%m-%d'))\n"; cat; echo)'
+alias yesterdays_commits='git log main..HEAD --pretty=format:"- %s" --first-parent --after="$(date -v-1d +'%Y-%m-%d') 00:00:00" --before="$(date -v-1d +'%Y-%m-%d') 23:59:59" --reverse | (echo "Yesterday'\''s commits ($(date -v-1d +'%Y-%m-%d'))\n"; cat; echo)'

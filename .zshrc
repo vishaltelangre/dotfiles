@@ -23,24 +23,17 @@ alias vim='/usr/local/bin/vim'
 PATH=$PATH:/usr/bin
 
 # nvm
- export NVM_DIR="$HOME/.nvm"
- [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
- [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 fpath=(~/.zsh/completions $fpath)
 autoload -U compinit && compinit
-
-export PATH=$PATH:$HOME/bin:/Applications/Postgres.app/Contents/Versions/latest/bin
-
-# source ~/.iterm2_shell_integration.zsh
 
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="/usr/local/sbin:$PATH"
 
-# pnpm
-export PNPM_HOME="/Users/vishal/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$PATH:/Users/vishal/.local/bin"
