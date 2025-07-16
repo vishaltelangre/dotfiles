@@ -17,8 +17,7 @@
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bundler-exec,extra}; do
+for file in ~/.{path,bundler-exec}; do
 	[ -r "$file" ] && source "$file"
 done
 unset file
@@ -27,5 +26,18 @@ unset file
 source ~/.aliases
 source ~/.functions
 source ~/.env
+
+
+# Source all dot files from ~/.misc directory if it exists
+mkdir -p ~/.misc
+# Use nullglob to avoid "no matches found" error when directory is empty
+setopt localoptions nullglob
+for file in ~/.misc/.*; do
+  # Skip . and .. entries, and only source regular files
+  if [ -f "$file" ] && [ "${file##*/}" != "." ] && [ "${file##*/}" != ".." ]; then
+    source "$file"
+  fi
+done
+unset file
 
 # $SHELL=/bin/zsh

@@ -25,3 +25,5 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 # Created by `pipx` on 2024-09-13 08:03:54
 export PATH="$PATH:/Users/vishal/.local/bin"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"

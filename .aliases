@@ -7,15 +7,12 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Shortcuts
-alias dropbox="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias p="cd ~/projects"
+alias w="cd ~/Work"
 alias g="git"
 alias h="history"
 alias j="jobs"
-alias e="emacs -nw"
-alias s="subl ."
 alias o="open"
 alias oo="open ."
 alias gst="git status"
@@ -49,8 +46,8 @@ alias gurl='curl --compressed'
 # Get week number
 alias week='date +%V'
 
-# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g; sudo gem update'
+# Get OS X Software Updates
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -132,11 +129,6 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias "$method"="lwp-request -m '$method'"
 done
 
-# Stuff I never really use but cannot delete either because of http://xkcd.com/530/
-alias stfu="osascript -e 'set volume output muted true'"
-alias pumpitup="osascript -e 'set volume 7'"
-alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
-
 # Show human friendly numbers and colors
 alias df='df -h'
 alias ll='ls -alGh'
@@ -154,7 +146,7 @@ alias cl='clear'
 alias gz='tar -zcvf'
 
 # Ruby
-alias c='rails c' # Rails 3
+alias c='rails c'
 alias tailf='tail -f'
 alias tfdl='tail -f log/development.log'
 alias tftl='tail -f log/test.log'
@@ -163,25 +155,19 @@ alias be='bundle exec'
 alias ka9='killall -9'
 alias k9='kill -9'
 
-# CLI - Improved (https://remysharp.com/2018/08/23/cli-improved)
-alias catplain='bat --style=plain --paging=never'
-alias catnum='bat --style=numbers --paging=never'
-alias catpager='bat'
-alias ping='prettyping --nolegend'
-alias preview="fzf --preview 'bat --color \"always\" {}'"
-# add support for ctrl+o to open selected file in VS Code
-export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
-alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
-alias help='tldr'
-
 # Tmux
 # Attach to an existing session or create a new session
 alias tmux="tmux attach || tmux new"
 alias tm="tmux"
 
-# GitHub Copilot
-alias ghcx='gh copilot explain'
-alias ghcs='gh copilot suggest'
+# Docker
+alias dc='docker compose'
+alias dc_restart='dc restart' # e.g. dc_restart rails
+alias dc_prune='docker system prune --filter "until=24h"'
+
+# GitHub Copilot (https://docs.github.com/en/copilot/how-tos/set-up/installing-github-copilot-in-the-cli)
+alias explain='gh copilot explain'
+alias suggest='gh copilot suggest'
 
 # Git commit helpers
 # Today's commits

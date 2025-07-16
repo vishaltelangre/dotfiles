@@ -16,7 +16,6 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 eval "$(rbenv init -)"
-eval "$(hub alias -s)"
 
 export VISUAL=vim
 alias vim='/usr/local/bin/vim'
@@ -37,3 +36,11 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:/Users/vishal/.local/bin"
+
+# pnpm
+export PNPM_HOME="/Users/vishal/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
