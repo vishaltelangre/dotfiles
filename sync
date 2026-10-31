@@ -42,6 +42,15 @@ function update() {
     echo "Installing tmux plugins via TPM..."
     "$HOME/.tmux/plugins/tpm/bin/install_plugins"
   fi
+
+  # Symlink Ghostty configuration
+  if [ -f "$DOTFILES_PATH/ghostty/config" ]; then
+    echo "Symlinking Ghostty config..."
+    mkdir -p "$HOME/.config/ghostty"
+    ln -sf "$DOTFILES_PATH/ghostty/config" "$HOME/.config/ghostty/config"
+    mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
+    ln -sf "$DOTFILES_PATH/ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+  fi
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then

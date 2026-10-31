@@ -4,7 +4,6 @@
     ci = commit
     st = status
     co = checkout
-    login = !sh /Users/vishaltelangre/workspace/engineering/git/git_login.sh
 
 [apply]
     # Detect whitespace errors when applying a patch
@@ -12,7 +11,7 @@
 
 [core]
     # Use custom `.gitignore` and `.gitattributes`
-	excludesfile = /Users/vishal/.gitignore
+	excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
     # Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
     # whitespace = space-before-tab,indent-with-non-tab,trailing-space
@@ -72,23 +71,13 @@
 [url "git@github.com:"]
     insteadOf = "gh:"
     pushInsteadOf = "github:"
-    pushInsteadOf = "git://github.com/"
-[url "git://github.com/"]
-    insteadOf = "github:"
 [url "git@gist.github.com:"]
     insteadOf = "gst:"
     pushInsteadOf = "gist:"
-    pushInsteadOf = "git://gist.github.com/"
-[url "git://gist.github.com/"]
-    insteadOf = "gist:"
 [user]
     name = Vishal Telangre
     email = the@vishaltelangre.com
     signingkey = FFC341B05CB7051477AC879516BA3EBD701E48D8
-[filter "hawser"]
-    clean = git hawser clean %f
-    smudge = git hawser smudge %f
-    required = true
 [filter "lfs"]
     clean = git lfs clean %f
     smudge = git lfs smudge %f
@@ -118,5 +107,3 @@
     master = master
 [pull]
 	rebase = false
-[http]
-	sslverify = false

@@ -22,10 +22,7 @@ for file in ~/.{path,bundler-exec}; do
 done
 unset file
 
-# Set Aliases
-source ~/.aliases
-source ~/.functions
-source ~/.env
+[ -f ~/.env ] && source ~/.env
 
 
 # Source all dot files from ~/.misc directory if it exists

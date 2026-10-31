@@ -17,8 +17,6 @@ source $ZSH/oh-my-zsh.sh
 
 eval "$(rbenv init -)"
 
-export VISUAL=vim
-alias vim='/usr/local/bin/vim'
 PATH=$PATH:/usr/bin
 
 # nvm
@@ -27,15 +25,22 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 fpath=(~/.zsh/completions $fpath)
-autoload -U compinit && compinit
-
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export GROOVY_HOME=/usr/local/opt/groovy/libexec
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:/Users/vishal/.local/bin"
+
+# Load dotfiles
+[ -f ~/.exports ] && source ~/.exports
+[ -f ~/.aliases ] && source ~/.aliases
+[ -f ~/.functions ] && source ~/.functions
 
 # pnpm
 export PNPM_HOME="/Users/vishal/Library/pnpm"
