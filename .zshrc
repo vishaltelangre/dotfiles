@@ -17,8 +17,6 @@ source $ZSH/oh-my-zsh.sh
 
 eval "$(rbenv init -)"
 
-PATH=$PATH:/usr/bin
-
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -31,11 +29,6 @@ if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
 else
   compinit -C
 fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$PATH:/Users/vishal/.local/bin"
 
 # Environment
 export EDITOR="vim"

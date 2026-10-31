@@ -15,8 +15,6 @@
   fi
 } &!
 
-[ -r ~/.path ] && source ~/.path
-
 [ -f ~/.env ] && source ~/.env
 
 
