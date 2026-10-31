@@ -4,7 +4,7 @@
 
 # Constants
 
-DOTFILES_PATH=~/projects/dotfiles
+DOTFILES_PATH="${DOTFILES_PATH:-$(cd "$(dirname "$0")" && pwd)}"
 
 # lOGIC
 
@@ -32,6 +32,16 @@ function update() {
 		rm -f ~/"$filename"
 		ln -s "$(pwd)/$filename" ~
 	done
+
+  # Auto-install TPM (Tmux Plugin Manager) and plugins
+  if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    echo "Cloning Tmux Plugin Manager (TPM)..."
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+  fi
+  if [ -x "$HOME/.tmux/plugins/tpm/bin/install_plugins" ]; then
+    echo "Installing tmux plugins via TPM..."
+    "$HOME/.tmux/plugins/tpm/bin/install_plugins"
+  fi
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
