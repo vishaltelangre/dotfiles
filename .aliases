@@ -78,10 +78,3 @@ alias dc='docker compose'
 alias dc_restart='dc restart'
 alias dc_prune='docker system prune --filter "until=24h"'
 
-# GitHub Copilot
-alias explain='gh copilot explain'
-alias suggest='gh copilot suggest'
-
-# Git commit helpers
-alias todays_commits='git log main..HEAD --pretty=format:"- %s" --first-parent --since="$(date +'%Y-%m-%d') 00:00:00" --reverse | (echo "Today'\''s commits ($(date +'%Y-%m-%d'))\n"; cat; echo)'
-alias yesterdays_commits='git log main..HEAD --pretty=format:"- %s" --first-parent --after="$(date -v-1d +'%Y-%m-%d') 00:00:00" --before="$(date -v-1d +'%Y-%m-%d') 23:59:59" --reverse | (echo "Yesterday'\''s commits ($(date -v-1d +'%Y-%m-%d'))\n"; cat; echo)'

@@ -1,30 +1,5 @@
-# Create a new directory and enter it
-function mcd() {
-	mkdir -p "$@" && cd "$@"
-}
-
-# Use Git’s colored diff as gdiff
-hash git &>/dev/null
-if [ $? -eq 0 ]; then
-	function gdiff() {
-		git diff --no-index --color-words "$@"
-	}
-fi
-
-# Syntax-highlight JSON strings or files
-# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-function json() {
-	if [ -t 0 ]; then # argument
-		python3 -m json.tool <<< "$*" | pygmentize -l javascript 2>/dev/null || python3 -m json.tool <<< "$*"
-	else # pipe
-		python3 -m json.tool | pygmentize -l javascript 2>/dev/null || python3 -m json.tool
-	fi
-}
-
-# Grep for a running process without matching grep itself
-function psgrep {
-	local first rest
-	first=$(echo "$1" | sed -e 's/^\(.\).*/\1/')
-	rest=$(echo "$1" | sed -e 's/^.\(.*\)/\1/' )
-	ps aux | grep "[$first]$rest"
+# Convert video to optimized GIF using ffmpeg and gifsicle
+gif() {
+	output_file="$1.gif"
+	ffmpeg -y -i "$1" -v quiet -pix_fmt rgb8 -r 10 "$output_file" && gifsicle -O3 "$output_file" -o "$output_file"
 }
