@@ -15,12 +15,7 @@
   fi
 } &!
 
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-for file in ~/.{path,bundler-exec}; do
-	[ -r "$file" ] && source "$file"
-done
-unset file
+[ -r ~/.path ] && source ~/.path
 
 [ -f ~/.env ] && source ~/.env
 

@@ -2,14 +2,9 @@
 # Executes commands at login pre-zshrc.
 #
 
-if [[ "$SSH_TTY" != "" ]]
-then
-  if [[ "$TERM" != "screen" ]]; then
-    screen -dr default
-    if (($?)); then
-      screen -ln -S default
-    fi
-  fi
+# Auto-attach or start tmux on SSH login
+if [[ -n "$SSH_TTY" && -z "$TMUX" ]]; then
+  tmux attach-session 2>/dev/null || tmux new-session
 fi
 
 export GPG_TTY=$(tty)

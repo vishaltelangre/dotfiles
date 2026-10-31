@@ -9,13 +9,10 @@ DOTFILES_PATH="${DOTFILES_PATH:-$(cd "$(dirname "$0")" && pwd)}"
 # lOGIC
 
 if hash update-dotfiles 2>/dev/null; then
-	# do nothing
-  echo "hee-haw!"
+  :
 else
-	# global command isn't set yet
-  echo "Setting up nice global command for this task (sudo password needed):"
-	sudo ln -s "$(pwd)/${0##*/}" /usr/local/bin/update-dotfiles
-	echo "Afterwards use 'update-dotfiles' command to easily sync dotfiles!"
+  mkdir -p "$HOME/.local/bin"
+  ln -sf "$(pwd)/${0##*/}" "$HOME/.local/bin/update-dotfiles"
 fi
 
 cd "$DOTFILES_PATH"
