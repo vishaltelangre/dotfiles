@@ -3,20 +3,6 @@ function mcd() {
 	mkdir -p "$@" && cd "$@"
 }
 
-# Determine size of a file or total size of a directory
-function fs() {
-	if du -b /dev/null > /dev/null 2>&1; then
-		local arg=-sbh
-	else
-		local arg=-sh
-	fi
-	if [[ -n "$@" ]]; then
-		du $arg -- "$@"
-	else
-		du $arg .[^.]* *
-	fi
-}
-
 # Use Git’s colored diff as gdiff
 hash git &>/dev/null
 if [ $? -eq 0 ]; then
@@ -24,15 +10,6 @@ if [ $? -eq 0 ]; then
 		git diff --no-index --color-words "$@"
 	}
 fi
-
-# Compare original and gzipped file size
-function gzsize() {
-	local origsize=$(wc -c < "$1")
-	local gzipsize=$(gzip -c "$1" | wc -c)
-	local ratio=$(echo "$gzipsize * 100/ $origsize" | bc -l)
-	printf "orig: %d bytes\n" "$origsize"
-	printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio"
-}
 
 # Syntax-highlight JSON strings or files
 # Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
@@ -44,54 +21,10 @@ function json() {
 	fi
 }
 
-# All the dig info for a domain
-function digga() {
-	dig +nocmd "$1" any +multiline +noall +answer
-}
-
-# Show all names (CNs and SANs) listed in the SSL certificate for a given domain
-function getcertnames() {
-	if [ -z "${1}" ]; then
-		echo "ERROR: No domain specified."
-		return 1
-	fi
-
-	local domain="${1}"
-	echo "Testing ${domain}…"
-	echo
-
-	local tmp=$(echo -e "GET / HTTP/1.0\nEOT" \
-		| openssl s_client -connect "${domain}:443" 2>&1);
-
-	if [[ "${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
-		local certText=$(echo "${tmp}" \
-			| openssl x509 -text -certopt "no_header, no_serial, no_version, \
-			no_signame, no_validity, no_issuer, no_pubkey, no_sigdump, no_aux");
-		echo "Common Name:"
-		echo
-		echo "${certText}" | grep "Subject:" | sed -e "s/^.*CN=//";
-		echo
-		echo "Subject Alternative Name(s):"
-		echo
-		echo "${certText}" | grep -A 1 "Subject Alternative Name:" \
-			| sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2
-		return 0
-	else
-		echo "ERROR: Certificate not found.";
-		return 1
-	fi
-}
-
 # Grep for a running process without matching grep itself
 function psgrep {
 	local first rest
 	first=$(echo "$1" | sed -e 's/^\(.\).*/\1/')
-	rest=$(echo "$1" | sed -e 's/^.\(.*\)/\1/')
+	rest=$(echo "$1" | sed -e 's/^.\(.*\)/\1/' )
 	ps aux | grep "[$first]$rest"
-}
-
-# Convert video to optimized GIF using ffmpeg and gifsicle
-gif() {
-	output_file="$1.gif"
-	ffmpeg -y -i "$1" -v quiet -pix_fmt rgb8 -r 10 "$output_file" && gifsicle -O3 "$output_file" -o "$output_file"
 }

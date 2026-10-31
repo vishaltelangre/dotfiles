@@ -37,8 +37,14 @@ fi
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:/Users/vishal/.local/bin"
 
+# Environment
+export EDITOR="vim"
+export VISUAL="vim"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export MANPAGER="less -X"
+
 # Load dotfiles
-[ -f ~/.exports ] && source ~/.exports
 [ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/.functions ] && source ~/.functions
 

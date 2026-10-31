@@ -36,32 +36,19 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
-# Gzip-enabled `curl`
-alias gurl='curl --compressed'
-
 # System updates
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup'
 
-# IP addresses
+# IP addresses & DNS
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
-
-# Flush DNS cache
 alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
-
-# Canonical hex dump; some systems have this symlinked
-command -v hd > /dev/null || alias hd="hexdump -C"
-command -v md5sum > /dev/null || alias md5sum="md5"
-command -v sha1sum > /dev/null || alias sha1sum="shasum"
-
-# Trim new lines and copy to clipboard
-alias copyclip="tr -d '\n' | pbcopy"
 
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
-# Show human friendly numbers and disk usage
+# Disk usage
 alias df='df -h'
 alias du='du -h -d 2'
 
@@ -70,9 +57,6 @@ alias less='less -r'
 alias tf='tail -f'
 alias lh='ls -alt | head'
 alias cl='clear'
-
-# Archive
-alias gz='tar -zcvf'
 
 # Ruby / Rails
 alias c='rails c'
