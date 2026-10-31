@@ -13,9 +13,17 @@ plugins=(git z)
 
 source $ZSH/oh-my-zsh.sh
 
+# Ensure unique entries in PATH
+typeset -U path PATH
+
+# Custom scripts and local binaries
+export PATH="$HOME/.local/bin:$PATH"
+
 # Customize to your needs...
 
-eval "$(rbenv init -)"
+if command -v rbenv >/dev/null 2>&1; then
+  eval "$(rbenv init -)"
+fi
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
@@ -42,9 +50,9 @@ export MANPAGER="less -X"
 [ -f ~/.functions ] && source ~/.functions
 
 # pnpm
-export PNPM_HOME="/Users/vishal/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *) [ -d "$PNPM_HOME" ] && export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end

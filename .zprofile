@@ -9,16 +9,27 @@ fi
 
 export GPG_TTY=$(tty)
 
+# Ensure unique entries in PATH
+typeset -U path PATH
 
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export DENO_INSTALL="/Users/vishal/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+# Android SDK
+if [ -d "$HOME/Library/Android/sdk" ]; then
+  export ANDROID_HOME="$HOME/Library/Android/sdk"
+  export PATH="$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools"
+fi
 
-# Created by `pipx` on 2024-09-13 08:03:54
-export PATH="$PATH:/Users/vishal/.local/bin"
+# Deno
+if [ -d "$HOME/.deno" ]; then
+  export DENO_INSTALL="$HOME/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
+fi
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Local bin
+export PATH="$HOME/.local/bin:$PATH"
+
+# Homebrew
+if [ -x "/opt/homebrew/bin/brew" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x "/usr/local/bin/brew" ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
