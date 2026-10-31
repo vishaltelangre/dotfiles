@@ -21,7 +21,7 @@ fi
 cd "$DOTFILES_PATH"
 
 echo "Pulling latest changes from remote git branch."
-git pull origin master
+git pull origin main
 
 function update() {
   files=$(find .* -type f -maxdepth 0)
